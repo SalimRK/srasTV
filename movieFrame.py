@@ -1,10 +1,10 @@
 import customtkinter as ctk
 import titles
 from tmdbv3api import TMDb, Movie
+import apiKeys
 
-tmdb_api = '7efc97b2176e7c82962cab44ea126623'
 tmdb = TMDb()
-tmdb.api_key = tmdb_api
+tmdb.api_key = apiKeys.tmdb_api
 
 movie = Movie()
 popular = movie.popular()

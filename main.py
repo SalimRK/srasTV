@@ -1,5 +1,4 @@
 import customtkinter as ctk
-from tmdbv3api import TMDb
 import topframe
 
 

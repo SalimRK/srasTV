@@ -2,11 +2,11 @@ import customtkinter as ctk
 import titles
 from PIL import Image
 from tmdbv3api import TMDb
+import apiKeys
 
 search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
-tmdb_api = '7efc97b2176e7c82962cab44ea126623'
 tmdb = TMDb()
-tmdb.api_key = tmdb_api
+tmdb.api_key = apiKeys.tmdb_api
 
 
 class SearchFrame(ctk.CTkScrollableFrame):
