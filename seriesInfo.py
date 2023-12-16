@@ -3,8 +3,10 @@ from PIL import Image
 import io
 import urllib.request
 
+
 class SeriesInfoFrame(ctk.CTkFrame):
-    def __init__(self, master, title_id, title, img_path, overview, first_air_date, vote_average, vote_count, genres, original_language, origin_country, **kwargs):
+    def __init__(self, master, title_id, title, img_path, overview, first_air_date, vote_average, vote_count, genres,
+                 original_language, origin_country, **kwargs):
         super().__init__(master, **kwargs)
 
         # Download and display the poster
@@ -23,10 +25,10 @@ class SeriesInfoFrame(ctk.CTkFrame):
         self.overview_label.grid(row=1, column=1, sticky=ctk.W, padx=10, pady=5)
 
         self.details_label = ctk.CTkLabel(self, text=f"First Air Date: {first_air_date}\n"
-                                                      f"Vote Average: {vote_average}\n"
-                                                      f"Vote Count: {vote_count}\n"
-                                                      f"Genres: {', '.join(genres)}\n"
-                                                      f"Original Language: {original_language}\n"
-                                                      f"Origin Country: {', '.join(origin_country)}",
+                                                     f"Vote Average: {vote_average}\n"
+                                                     f"Vote Count: {vote_count}\n"
+                                                     f"Genres: {', '.join(genres)}\n"
+                                                     f"Original Language: {original_language}\n"
+                                                     f"Origin Country: {', '.join(origin_country)}",
                                           justify=ctk.LEFT)
         self.details_label.grid(row=2, column=1, sticky=ctk.W, padx=10, pady=5)

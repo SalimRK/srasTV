@@ -5,6 +5,7 @@ import seriesFrame
 import searchFrame
 from PIL import Image
 
+# icons
 home_icon_path = ctk.CTkImage(Image.open("Assets/home icon.png"))
 movies_icon_path = ctk.CTkImage(Image.open("Assets/movies icon.png"))
 series_icon_path = ctk.CTkImage(Image.open("Assets/series icon.png"))
@@ -16,22 +17,27 @@ class TopFrame(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
+        # home button
         self.home_button = ctk.CTkButton(self, image=home_icon_path, text="", command=self.home_click, height=70,
                                          width=70)
         self.home_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
+        # Movie button
         self.movies_button = ctk.CTkButton(self, image=movies_icon_path, text="", command=self.movies_click, height=70,
                                            width=70)
         self.movies_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
+        # Series button
         self.series_button = ctk.CTkButton(self, image=series_icon_path, text="", command=self.series_click, height=70,
                                            width=70)
         self.series_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
+        # Search button
         self.search_button = ctk.CTkButton(self, image=search_icon_path, text="", command=self.search_click, height=70,
                                            width=70)
         self.search_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
+        # Download button
         self.downloads_button = ctk.CTkButton(self, image=downloads_icon_path, text="", command=self.downloads_click,
                                               height=70, width=70)
         self.downloads_button.pack(side=ctk.LEFT, padx=30, pady=10)
@@ -51,6 +57,7 @@ class TopFrame(ctk.CTkFrame):
     def downloads_click(self):
         pass
 
+    # swich frames delet the befor and add the new one
     def switch_frame(self, frame_class):
         if hasattr(self, 'current_frame'):
             self.current_frame.destroy()
