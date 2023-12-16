@@ -1,5 +1,8 @@
 import customtkinter as ctk
-
+import homeFrame
+import movieFrame
+import seriesFrame
+import searchFrame
 from PIL import Image
 
 home_icon_path = ctk.CTkImage(Image.open("Assets/home icon.png"))
@@ -34,16 +37,23 @@ class TopFrame(ctk.CTkFrame):
         self.downloads_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
     def home_click(self):
-        pass
+        self.switch_frame(homeFrame.HomeFrame)
 
     def movies_click(self):
-        pass
-
-    def search_click(self):
-        pass
+        self.switch_frame(movieFrame.MovieFrame)
 
     def series_click(self):
-        pass
+        self.switch_frame(seriesFrame.SeriesFrame)
+
+    def search_click(self):
+        self.switch_frame(searchFrame.SearchFrame)
 
     def downloads_click(self):
         pass
+
+    def switch_frame(self, frame_class):
+        if hasattr(self, 'current_frame'):
+            self.current_frame.destroy()
+
+        self.current_frame = frame_class(self.master)
+        self.current_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew", columnspan=5)
