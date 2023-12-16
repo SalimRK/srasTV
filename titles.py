@@ -20,5 +20,5 @@ class TitleFrame(ctk.CTkFrame):
         self.title_poster.grid(row=0, column=0)
 
         # add widgets onto the frame, for example:
-        self.title_label = ctk.CTkLabel(self, text="Title: " + title + "\nID: " + str(title_id))
+        self.title_label = ctk.CTkLabel(self, text="Title: " + title + "\nID: " + str(title_id), wraplength=150)
         self.title_label.grid(row=1, column=0, padx=10, pady=10)
