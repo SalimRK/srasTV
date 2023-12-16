@@ -2,6 +2,7 @@ import customtkinter as ctk
 from PIL import Image
 import urllib.request
 import io
+import seriesInfo
 
 
 class TitleFrame(ctk.CTkFrame):
@@ -22,3 +23,10 @@ class TitleFrame(ctk.CTkFrame):
         # add widgets onto the frame, for example:
         self.title_label = ctk.CTkLabel(self, text="Title: " + title + "\nID: " + str(title_id), wraplength=150)
         self.title_label.grid(row=1, column=0, padx=10, pady=10)
+
+    #     self.title_poster.bind("<Button-1>", lambda event: self.show_series_info(title, title_id, img_path))
+    #
+    # def show_series_info(self, title, title_id, img_path):
+    #     # Create and display the SeriesInfoFrame
+    #     series_info_frame = seriesInfo.SeriesInfoFrame(self.master, title_id, title, img_path)
+    #     series_info_frame.pack()

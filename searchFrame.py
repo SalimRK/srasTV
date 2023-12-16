@@ -33,19 +33,31 @@ class SearchFrame(ctk.CTkScrollableFrame):
 
         self.result_frame = ctk.CTkFrame(self)
         self.result_frame.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky=ctk.EW)
-        self.grid_columnconfigure(3, weight=1)
+
+        self.result_frames = []
+
+    def clear_result_frames(self):
+        # Destroy or remove existing result frames
+        for frame in self.result_frames:
+            frame.destroy()
+        self.result_frames = []
 
     def display_result(self, search, selected_option):
+        # Clear existing result frames
+        self.clear_result_frames()
+
         i = 3
         j = 0
         for res in search:
             if selected_option == "Series":
-                self.my_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.name,
-                                                  img_path=res.poster_path)
+                new_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.name,
+                                              img_path=res.poster_path)
             elif selected_option == "Movie":
-                self.my_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.title,
-                                                  img_path=res.poster_path)
-            self.my_frame.grid(row=i, column=j, padx=10, pady=10)
+                new_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.title,
+                                              img_path=res.poster_path)
+            new_frame.grid(row=i, column=j, padx=10, pady=10)
+            self.result_frames.append(new_frame)
+
             j += 1
             if j % 3 == 0:
                 i += 1
