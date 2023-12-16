@@ -1,12 +1,17 @@
 import customtkinter as ctk
-import titles
 
 
-class HomeFrame(ctk.CTkScrollableFrame):
+class HomeFrame(ctk.CTkFrame):
+
+    text = """
+    This project is an app for streaming movies and tv shows for free with no fees or ads
+    author: salim rizk
+    github: 
+    
+    
+    """
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+        self.label = ctk.CTkLabel(self, text="")
+        self.label.grid(row=1, column=0, padx=10, pady=10)
 
-        for i in range(5):
-            for j in range(4):
-                self.my_frame = titles.TitleFrame(master=self)
-                self.my_frame.grid(row=i, column=j, padx=20, pady=20)
