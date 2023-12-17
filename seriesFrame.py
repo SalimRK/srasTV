@@ -23,7 +23,8 @@ class SeriesFrame(ctk.CTkScrollableFrame):
         j = 0
         for p in popular:
             # create title object for each show
-            self.my_frame = titles.TitleFrame(master=self, title_id=p.id, title=p.name, img_path=p.poster_path)
+            self.my_frame = titles.TitleFrame(master=self, title_id=p.id, title=p.name, img_path=p.poster_path,
+                                              platform="series")
             self.my_frame.grid(row=i, column=j, padx=10, pady=10)
             j += 1
             if j % 3 == 0:

@@ -51,10 +51,10 @@ class SearchFrame(ctk.CTkScrollableFrame):
         for res in search:
             if selected_option == "Series":
                 new_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.name,
-                                              img_path=res.poster_path)
+                                              img_path=res.poster_path, platform="series")
             elif selected_option == "Movie":
                 new_frame = titles.TitleFrame(master=self.result_frame, title_id=res.id, title=res.title,
-                                              img_path=res.poster_path)
+                                              img_path=res.poster_path, platform="movie")
             new_frame.grid(row=i, column=j, padx=10, pady=10)
             self.result_frames.append(new_frame)
 

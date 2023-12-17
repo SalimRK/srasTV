@@ -57,7 +57,7 @@ class TopFrame(ctk.CTkFrame):
     def downloads_click(self):
         pass
 
-    # swich frames delet the befor and add the new one
+    # switch frames: delete the old and add the new one
     def switch_frame(self, frame_class):
         if hasattr(self, 'current_frame'):
             self.current_frame.destroy()
