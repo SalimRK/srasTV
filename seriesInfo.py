@@ -6,7 +6,7 @@ class SeriesInfoFrame(ctk.CTkToplevel):
     def __init__(self, master, title_id, **kwargs):
         super().__init__(master, **kwargs)
         self.geometry("600x500")
-        series_data = querys.get_tv_info()
+        series_data = querys.get_tv_info(title_id)
 
         img_path = series_data.poster_path
         title = series_data.name
