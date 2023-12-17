@@ -1,22 +1,14 @@
 # display the popular tv series
-
 import customtkinter as ctk
 import titles
-from tmdbv3api import TMDb, TV
-import apiKeys
-
-# initialize TDMb
-tmdb = TMDb()
-tmdb.api_key = apiKeys.tmdb_api
-
-# initialize tv functions
-tv = TV()
-popular = tv.popular()
+import querys
 
 
 class SeriesFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+
+        popular = querys.get_popular_tv()
 
         # display the titles in 3 columns, x rows patterns
         i = 0

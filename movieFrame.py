@@ -1,18 +1,12 @@
 import customtkinter as ctk
 import titles
-from tmdbv3api import TMDb, Movie
-import apiKeys
-
-tmdb = TMDb()
-tmdb.api_key = apiKeys.tmdb_api
-
-movie = Movie()
-popular = movie.popular()
+import querys
 
 
 class MovieFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+        popular = querys.get_popular_movie()
         i = 0
         j = 0
         for p in popular:

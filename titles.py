@@ -1,10 +1,7 @@
-import io
-import urllib.request
-
 import customtkinter as ctk
-from PIL import Image
 
 import movieInfo
+import querys
 import seriesInfo
 
 
@@ -14,12 +11,7 @@ class TitleFrame(ctk.CTkFrame):
 
         self.movie_window = None
         self.series_window = None
-        try:
-            with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
-                raw_data = u.read()
-            image = Image.open(io.BytesIO(raw_data))
-        except TypeError:
-            image = Image.open("Assets/no poster.png")
+        image = querys.get_poster(img_path)
         self.poster_path = ctk.CTkImage(image, size=(120, 170))
         self.grid_rowconfigure(1, weight=1)  # configure grid system
         self.grid_columnconfigure(1, weight=1)

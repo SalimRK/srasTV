@@ -1,13 +1,10 @@
 import customtkinter as ctk
 import titles
 from PIL import Image
-from tmdbv3api import TMDb
-import apiKeys
 import searchErrorDialog
+import querys
 
 search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
-tmdb = TMDb()
-tmdb.api_key = apiKeys.tmdb_api
 
 
 class SearchFrame(ctk.CTkScrollableFrame):
@@ -69,20 +66,13 @@ class SearchFrame(ctk.CTkScrollableFrame):
             search_for = self.search_entry.get()
             selected_option = self.selected_option.get()
             if selected_option == "Series":
-                from tmdbv3api import TV
-
-                tv = TV()
-                search = tv.search(search_for)
-
+                search = querys.search_tv(search_for)
                 self.display_result(search, selected_option)
 
             elif selected_option == "Movie":
-                from tmdbv3api import Movie
-
-                movie = Movie()
-                search = movie.search(search_for)
+                search = querys.search_movie(search_for)
 
                 self.display_result(search, selected_option)
-        except AttributeError as e:
+        except AttributeError:
             error_dialog = searchErrorDialog.SeriesInfoFrame(self)
             error_dialog.grab_set()

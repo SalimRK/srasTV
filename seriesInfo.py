@@ -1,23 +1,12 @@
 import customtkinter as ctk
-from PIL import Image
-import io
-import urllib.request
-from tmdbv3api import TMDb, TV
-import apiKeys
-
-# initialize TDMb
-tmdb = TMDb()
-tmdb.api_key = apiKeys.tmdb_api
-
-# initialize tv functions
-tv = TV()
+import querys
 
 
 class SeriesInfoFrame(ctk.CTkToplevel):
     def __init__(self, master, title_id, **kwargs):
         super().__init__(master, **kwargs)
         self.geometry("600x500")
-        series_data = tv.details(title_id)
+        series_data = querys.get_tv_info()
 
         img_path = series_data.poster_path
         title = series_data.name
@@ -28,13 +17,8 @@ class SeriesInfoFrame(ctk.CTkToplevel):
         vote_average = series_data.vote_average
         vote_count = series_data.vote_count
 
-        # Download and display the poster
-        try:
-            with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
-                raw_data = u.read()
-            image = Image.open(io.BytesIO(raw_data))
-        except TypeError:
-            image = Image.open("Assets/no poster.png")
+        image = querys.get_poster(img_path)
+
         self.poster_path = ctk.CTkImage(image, size=(150, 200))
         self.title_poster = ctk.CTkLabel(self, text="", image=self.poster_path)
         self.title_poster.grid(row=0, column=0, rowspan=5, padx=10, pady=10)
