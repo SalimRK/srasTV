@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import query
+import titles
 
 
 class MovieInfoFrame(ctk.CTkToplevel):
@@ -16,7 +17,7 @@ class MovieInfoFrame(ctk.CTkToplevel):
         vote_average = series_data.vote_average
         vote_count = series_data.vote_count
 
-        self.geometry("600x500")
+        self.geometry("600x700")
         self.title(title)
 
         image = query.get_poster(img_path)
@@ -41,13 +42,28 @@ class MovieInfoFrame(ctk.CTkToplevel):
 
         self.watch_button = ctk.CTkButton(self, text="Watch Movie", command=self.launch_movie_function)
         self.watch_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.url_textbox = ctk.CTkTextbox(self, width=400, height=50)
+        self.url_textbox.configure(state="disabled")
+        self.url_textbox.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+
+        self.recommendations_frame = ctk.CTkFrame(self)
+        self.recommendations_frame.grid(row=5, column=0, columnspan=3, padx=10, pady=10)
+        recommendations = query.get_movie_recommendations(title_id)
+
+        i = 0
+        j = 0
+        for r in recommendations:
+            self.my_frame = titles.TitleFrame(master=self.recommendations_frame, title_id=r.id, title=r.title, img_path=r.poster_path,
+                                         platform="movie")
+            self.my_frame.grid(row=i, column=j, padx=10, pady=10)
+
+            j += 1
+            if j % 3 == 0:
+                break
 
     def launch_movie_function(self):
         # Assuming you have a function in the query file that you want to call
         url = query.watch_movie(self.title_id)
-
-        self.url_textbox = ctk.CTkTextbox(self, width=400, height=50)
+        self.url_textbox.configure(state="normal")
         self.url_textbox.insert("0.0", url)
         self.url_textbox.configure(state="disabled")
-        self.url_textbox.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
-
