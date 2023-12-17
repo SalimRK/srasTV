@@ -3,6 +3,7 @@ import titles
 from PIL import Image
 from tmdbv3api import TMDb
 import apiKeys
+import searchErrorDialog
 
 search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
 tmdb = TMDb()
@@ -64,23 +65,24 @@ class SearchFrame(ctk.CTkScrollableFrame):
                 j = 0
 
     def search_button_clicked(self):
-        search_for = self.search_entry.get()
-        selected_option = self.selected_option.get()
-        if selected_option == "Series":
-            from tmdbv3api import TV
+        try:
+            search_for = self.search_entry.get()
+            selected_option = self.selected_option.get()
+            if selected_option == "Series":
+                from tmdbv3api import TV
 
-            tv = TV()
-            try:
+                tv = TV()
                 search = tv.search(search_for)
 
                 self.display_result(search, selected_option)
-            except:
 
+            elif selected_option == "Movie":
+                from tmdbv3api import Movie
 
-        elif selected_option == "Movie":
-            from tmdbv3api import Movie
+                movie = Movie()
+                search = movie.search(search_for)
 
-            movie = Movie()
-            search = movie.search(search_for)
-
-            self.display_result(search, selected_option)
+                self.display_result(search, selected_option)
+        except AttributeError as e:
+            error_dialog = searchErrorDialog.SeriesInfoFrame(self)
+            error_dialog.grab_set()

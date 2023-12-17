@@ -39,7 +39,7 @@ class TitleFrame(ctk.CTkFrame):
 
             if self.series_window is None or not self.series_window.winfo_exists():
                 self.series_window = seriesInfo.SeriesInfoFrame(self.master, title_id)
-                self.series_window.focus()
+                self.series_window.grab_set()
             else:
                 self.series_window.focus()  # if window exists focus it
         elif title_platform == "movie":
@@ -47,6 +47,6 @@ class TitleFrame(ctk.CTkFrame):
 
             if self.movie_window is None or not self.movie_window.winfo_exists():
                 self.movie_window = movieInfo.MovieInfoFrame(self.master, title_id)
-                self.movie_window.focus()
+                self.movie_window.grab_set()
             else:
                 self.movie_window.focus()  # if window exists focus it
