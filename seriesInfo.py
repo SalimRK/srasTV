@@ -29,9 +29,12 @@ class SeriesInfoFrame(ctk.CTkToplevel):
         vote_count = series_data.vote_count
 
         # Download and display the poster
-        with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
-            raw_data = u.read()
-        image = Image.open(io.BytesIO(raw_data))
+        try:
+            with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
+                raw_data = u.read()
+            image = Image.open(io.BytesIO(raw_data))
+        except TypeError:
+            image = Image.open("Assets/no poster.png")
         self.poster_path = ctk.CTkImage(image, size=(150, 200))
         self.title_poster = ctk.CTkLabel(self, text="", image=self.poster_path)
         self.title_poster.grid(row=0, column=0, rowspan=5, padx=10, pady=10)

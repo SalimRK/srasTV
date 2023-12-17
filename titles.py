@@ -31,9 +31,9 @@ class TitleFrame(ctk.CTkFrame):
         self.title_label = ctk.CTkLabel(self, text="Title: " + title + "\nID: " + str(title_id), wraplength=150)
         self.title_label.grid(row=1, column=0, padx=10, pady=10)
 
-        self.title_poster.bind("<Button-1>", lambda event: self.show_series_info(title_id, platform))
+        self.title_poster.bind("<Button-1>", lambda event: self.show_info(title_id, platform))
 
-    def show_series_info(self, title_id, title_platform):
+    def show_info(self, title_id, title_platform):
         if title_platform == "series":
             # Create and display the SeriesInfoWindows
 
