@@ -2,7 +2,7 @@ import customtkinter as ctk
 from PIL import Image
 import io
 import urllib.request
-from tmdbv3api import TMDb, TV
+from tmdbv3api import TMDb, Movie
 import apiKeys
 
 # initialize TDMb
@@ -10,21 +10,20 @@ tmdb = TMDb()
 tmdb.api_key = apiKeys.tmdb_api
 
 # initialize tv functions
-tv = TV()
+movie = Movie()
 
 
-class SeriesInfoFrame(ctk.CTkToplevel):
+class MovieInfoFrame(ctk.CTkToplevel):
     def __init__(self, master, title_id, **kwargs):
         super().__init__(master, **kwargs)
         self.geometry("600x500")
-        series_data = tv.details(title_id)
+        series_data = movie.details(title_id)
 
         img_path = series_data.poster_path
-        title = series_data.name
+        title = series_data.title
         overview = series_data.overview
         genres = series_data.genres
         original_language = series_data.original_language
-        origin_country = series_data.origin_country
         vote_average = series_data.vote_average
         vote_count = series_data.vote_count
 
@@ -47,7 +46,6 @@ class SeriesInfoFrame(ctk.CTkToplevel):
                                           text=f"Vote Average: {vote_average}\n"
                                                f"Vote Count: {vote_count}\n"
                                                f"Genres: {', '.join(genre['name'] for genre in genres)}\n"
-                                               f"Original Language: {original_language}\n"
-                                               f"Origin Country: {', '.join(str(country) for country in origin_country)}",
+                                               f"Original Language: {original_language}\n",
                                           justify=ctk.LEFT)
         self.details_label.grid(row=2, column=1, sticky=ctk.W, padx=10, pady=5)

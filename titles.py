@@ -1,7 +1,10 @@
+import io
+import urllib.request
+
 import customtkinter as ctk
 from PIL import Image
-import urllib.request
-import io
+
+import movieInfo
 import seriesInfo
 
 
@@ -9,11 +12,15 @@ class TitleFrame(ctk.CTkFrame):
     def __init__(self, master, title, title_id, img_path, platform, **kwargs):
         super().__init__(master, **kwargs)
 
-        with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
-            raw_data = u.read()
-        image = Image.open(io.BytesIO(raw_data))
+        self.movie_window = None
+        self.series_window = None
+        try:
+            with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
+                raw_data = u.read()
+            image = Image.open(io.BytesIO(raw_data))
+        except:
+            image = Image.open("Assets/no poster.png")
         self.poster_path = ctk.CTkImage(image, size=(120, 170))
-
         self.grid_rowconfigure(1, weight=1)  # configure grid system
         self.grid_columnconfigure(1, weight=1)
 
@@ -29,6 +36,17 @@ class TitleFrame(ctk.CTkFrame):
     def show_series_info(self, title_id, title_platform):
         if title_platform == "series":
             # Create and display the SeriesInfoWindows
-            seriesInfo.SeriesInfoFrame(self.master, title_id)
+
+            if self.series_window is None or not self.series_window.winfo_exists():
+                self.series_window = seriesInfo.SeriesInfoFrame(self.master, title_id)
+                self.series_window.focus()
+            else:
+                self.series_window.focus()  # if window exists focus it
         elif title_platform == "movie":
-            pass
+            # Create and display the SeriesInfoWindows
+
+            if self.movie_window is None or not self.movie_window.winfo_exists():
+                self.movie_window = movieInfo.MovieInfoFrame(self.master, title_id)
+                self.movie_window.focus()
+            else:
+                self.movie_window.focus()  # if window exists focus it

@@ -70,9 +70,12 @@ class SearchFrame(ctk.CTkScrollableFrame):
             from tmdbv3api import TV
 
             tv = TV()
-            search = tv.search(search_for)
+            try:
+                search = tv.search(search_for)
 
-            self.display_result(search, selected_option)
+                self.display_result(search, selected_option)
+            except:
+
 
         elif selected_option == "Movie":
             from tmdbv3api import Movie
