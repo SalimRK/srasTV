@@ -1,7 +1,7 @@
 import customtkinter as ctk
 
 import movieInfo
-import querys
+import query
 import seriesInfo
 
 
@@ -11,7 +11,7 @@ class TitleFrame(ctk.CTkFrame):
 
         self.movie_window = None
         self.series_window = None
-        image = querys.get_poster(img_path)
+        image = query.get_poster(img_path)
         self.poster_path = ctk.CTkImage(image, size=(120, 170))
         self.grid_rowconfigure(1, weight=1)  # configure grid system
         self.grid_columnconfigure(1, weight=1)

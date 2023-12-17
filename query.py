@@ -3,6 +3,7 @@ import apiKeys
 import urllib
 from PIL import Image
 import io
+import os
 
 tmdb = TMDb()
 tmdb.api_key = apiKeys.tmdb_api
@@ -51,3 +52,17 @@ def get_poster(img_path):
     except TypeError:
         image = Image.open("Assets/no poster.png")
         return image
+
+
+def watch_movie(title_id):
+    # Determine the absolute path to the template HTML file
+    template_path = os.path.abspath('temp/templateMovie.html')
+
+    # Generate TV series URL with query parameters
+    tv_src_url = f"file://{template_path}?TMDB_ID={title_id}"
+    return tv_src_url
+
+
+def get_movie_recommendations(title_id):
+    recommendations = movie.recommendations(movie_id=title_id)
+    return recommendations

@@ -1,14 +1,14 @@
 # display the popular tv series
 import customtkinter as ctk
 import titles
-import querys
+import query
 
 
 class SeriesFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
-        popular = querys.get_popular_tv()
+        popular = query.get_popular_tv()
 
         # display the titles in 3 columns, x rows patterns
         i = 0

@@ -1,13 +1,13 @@
 import customtkinter as ctk
-import querys
+import query
 
 
 class MovieInfoFrame(ctk.CTkToplevel):
     def __init__(self, master, title_id, **kwargs):
         super().__init__(master, **kwargs)
-        self.geometry("600x500")
-        series_data = querys.get_movie_info(title_id)
 
+        series_data = query.get_movie_info(title_id)
+        self.title_id = title_id
         img_path = series_data.poster_path
         title = series_data.title
         overview = series_data.overview
@@ -16,10 +16,13 @@ class MovieInfoFrame(ctk.CTkToplevel):
         vote_average = series_data.vote_average
         vote_count = series_data.vote_count
 
-        image = querys.get_poster(img_path)
+        self.geometry("600x500")
+        self.title(title)
+
+        image = query.get_poster(img_path)
         self.poster_path = ctk.CTkImage(image, size=(150, 200))
         self.title_poster = ctk.CTkLabel(self, text="", image=self.poster_path)
-        self.title_poster.grid(row=0, column=0, rowspan=5, padx=10, pady=10)
+        self.title_poster.grid(row=0, column=0, rowspan=2, padx=10, pady=10)
 
         # Display series information
         self.title_label = ctk.CTkLabel(self, text=title, font=("Helvetica", 16, "bold"))
@@ -35,3 +38,16 @@ class MovieInfoFrame(ctk.CTkToplevel):
                                                f"Original Language: {original_language}\n",
                                           justify=ctk.LEFT)
         self.details_label.grid(row=2, column=1, sticky=ctk.W, padx=10, pady=5)
+
+        self.watch_button = ctk.CTkButton(self, text="Watch Movie", command=self.launch_movie_function)
+        self.watch_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+
+    def launch_movie_function(self):
+        # Assuming you have a function in the query file that you want to call
+        url = query.watch_movie(self.title_id)
+
+        self.url_textbox = ctk.CTkTextbox(self, width=400, height=50)
+        self.url_textbox.insert("0.0", url)
+        self.url_textbox.configure(state="disabled")
+        self.url_textbox.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+

@@ -2,7 +2,7 @@ import customtkinter as ctk
 import titles
 from PIL import Image
 import searchErrorDialog
-import querys
+import query
 
 search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
 
@@ -66,11 +66,11 @@ class SearchFrame(ctk.CTkScrollableFrame):
             search_for = self.search_entry.get()
             selected_option = self.selected_option.get()
             if selected_option == "Series":
-                search = querys.search_tv(search_for)
+                search = query.search_tv(search_for)
                 self.display_result(search, selected_option)
 
             elif selected_option == "Movie":
-                search = querys.search_movie(search_for)
+                search = query.search_movie(search_for)
 
                 self.display_result(search, selected_option)
         except AttributeError:

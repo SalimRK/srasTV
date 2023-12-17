@@ -1,12 +1,12 @@
 import customtkinter as ctk
-import querys
+import query
 
 
 class SeriesInfoFrame(ctk.CTkToplevel):
     def __init__(self, master, title_id, **kwargs):
         super().__init__(master, **kwargs)
         self.geometry("600x500")
-        series_data = querys.get_tv_info(title_id)
+        series_data = query.get_tv_info(title_id)
 
         img_path = series_data.poster_path
         title = series_data.name
@@ -17,7 +17,7 @@ class SeriesInfoFrame(ctk.CTkToplevel):
         vote_average = series_data.vote_average
         vote_count = series_data.vote_count
 
-        image = querys.get_poster(img_path)
+        image = query.get_poster(img_path)
 
         self.poster_path = ctk.CTkImage(image, size=(150, 200))
         self.title_poster = ctk.CTkLabel(self, text="", image=self.poster_path)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>srastv</title>
+    <style>
+        #iframeContainer {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* This creates a 16:9 aspect ratio container */
+        }
+
+        #responsiveIframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="iframeContainer">
+        <iframe id="responsiveIframe" src="" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function resizeIframe() {
+            var container = document.getElementById('iframeContainer');
+            var iframe = document.getElementById('responsiveIframe');
+            var aspectRatio = 16 / 9; // 16:9 aspect ratio
+
+            var containerWidth = container.offsetWidth;
+            var newHeight = Math.floor(containerWidth / aspectRatio);
+
+            iframe.style.width = containerWidth + 'px';
+            iframe.style.height = newHeight + 'px';
+        }
+
+        function updateIframeSrc() {
+            var iframe = document.getElementById('responsiveIframe');
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+
+            var id = urlParams.get('TMDB_ID');
+
+            var movieSrcUrl = `https://www.2embed.cc/embed/${id}`;
+            iframe.src = movieSrcUrl;
+        }
+
+        // Call resizeIframe() initially and whenever the window is resized
+        window.onload = window.onresize = function () {
+            resizeIframe();
+            updateIframeSrc();
+        };
+    </script>
+</body>
+</html>

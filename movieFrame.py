@@ -1,12 +1,12 @@
 import customtkinter as ctk
 import titles
-import querys
+import query
 
 
 class MovieFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        popular = querys.get_popular_movie()
+        popular = query.get_popular_movie()
         i = 0
         j = 0
         for p in popular:
