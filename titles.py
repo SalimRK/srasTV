@@ -18,7 +18,7 @@ class TitleFrame(ctk.CTkFrame):
             with urllib.request.urlopen("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + img_path) as u:
                 raw_data = u.read()
             image = Image.open(io.BytesIO(raw_data))
-        except:
+        except TypeError:
             image = Image.open("Assets/no poster.png")
         self.poster_path = ctk.CTkImage(image, size=(120, 170))
         self.grid_rowconfigure(1, weight=1)  # configure grid system
