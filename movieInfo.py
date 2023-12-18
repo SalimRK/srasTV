@@ -53,8 +53,8 @@ class MovieInfoFrame(ctk.CTkToplevel):
         i = 0
         j = 0
         for r in recommendations:
-            self.my_frame = titles.TitleFrame(master=self.recommendations_frame, title_id=r.id, title=r.title, img_path=r.poster_path,
-                                         platform="movie")
+            self.my_frame = titles.TitleFrame(master=self.recommendations_frame, title_id=r.id, title=r.title,
+                                              img_path=r.poster_path, platform="movie")
             self.my_frame.grid(row=i, column=j, padx=10, pady=10)
 
             j += 1

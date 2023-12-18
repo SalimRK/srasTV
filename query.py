@@ -72,3 +72,12 @@ def get_movie_recommendations(title_id):
 def get_seasons(title_id, season_num):
     result = season.details(title_id, season_num)
     return result
+
+
+def watch_episode(title_id, episode_number, season_number):
+    # Determine the absolute path to the template HTML file
+    template_path = os.path.abspath('temp/templateTv.html')
+
+    # Generate TV series URL with query parameters
+    tv_src_url = f"file://{template_path}?TMDB_ID={title_id}&seasonNumber={season_number}&episodeNumber={episode_number}"
+    return tv_src_url
