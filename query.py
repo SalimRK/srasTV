@@ -1,4 +1,4 @@
-from tmdbv3api import TMDb, Movie, TV
+from tmdbv3api import TMDb, Movie, TV, Season
 import apiKeys
 import urllib
 from PIL import Image
@@ -10,6 +10,7 @@ tmdb.api_key = apiKeys.tmdb_api
 
 movie = Movie()
 tv = TV()
+season = Season()
 
 
 def get_popular_movie():
@@ -66,3 +67,8 @@ def watch_movie(title_id):
 def get_movie_recommendations(title_id):
     recommendations = movie.recommendations(movie_id=title_id)
     return recommendations
+
+
+def get_seasons(title_id, season_num):
+    result = season.details(title_id, season_num)
+    return result
