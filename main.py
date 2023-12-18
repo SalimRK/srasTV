@@ -18,11 +18,12 @@ class App(ctk.CTk):
 
         # add the top frame
         self.top_frame = topframe.TopFrame(master=self)
-        self.top_frame.pack(padx=20, pady=20, fill="both")
+        self.top_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew", columnspan=5)
+
         # initialize the home page
         import homeFrame
         self.home_frame = homeFrame.HomeFrame(master=self)
-        self.home_frame.pack(padx=20, pady=20, fill="both")
+        self.home_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew", columnspan=5)
 
     # def key_handler(self, event):
     #     if event.keysym == "F11" and self.fullScreen is False:
