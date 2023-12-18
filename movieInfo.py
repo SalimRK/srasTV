@@ -49,17 +49,20 @@ class MovieInfoFrame(ctk.CTkToplevel):
         self.recommendations_frame = ctk.CTkFrame(self)
         self.recommendations_frame.grid(row=5, column=0, columnspan=3, padx=10, pady=10)
         recommendations = query.get_movie_recommendations(title_id)
+        try:
+            i = 0
+            j = 0
+            for r in recommendations:
+                self.my_frame = titles.TitleFrame(master=self.recommendations_frame, title_id=r.id, title=r.title,
+                                                  img_path=r.poster_path, platform="movie")
+                self.my_frame.grid(row=i, column=j, padx=10, pady=10)
 
-        i = 0
-        j = 0
-        for r in recommendations:
-            self.my_frame = titles.TitleFrame(master=self.recommendations_frame, title_id=r.id, title=r.title,
-                                              img_path=r.poster_path, platform="movie")
-            self.my_frame.grid(row=i, column=j, padx=10, pady=10)
-
-            j += 1
-            if j % 3 == 0:
-                break
+                j += 1
+                if j % 3 == 0:
+                    break
+        except AttributeError:
+            self.error_label = ctk.CTkLabel(self.recommendations_frame, text="No Recommendations")
+            self.error_label.grid(row=0, column=0, padx=10, pady=10)
 
     def launch_movie_function(self):
         # Assuming you have a function in the query file that you want to call

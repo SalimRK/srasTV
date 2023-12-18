@@ -19,6 +19,6 @@ class SeriesFrame(ctk.CTkScrollableFrame):
                                               platform="series")
             self.my_frame.grid(row=i, column=j, padx=10, pady=10)
             j += 1
-            if j % 3 == 0:
+            if j % 4 == 0:
                 i += 1
                 j = 0
