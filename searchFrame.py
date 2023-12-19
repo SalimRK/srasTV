@@ -3,8 +3,9 @@ import titles
 from PIL import Image
 import searchErrorDialog
 import query
+import os
 
-search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
+search_icon_path = ctk.CTkImage(Image.open(os.path.abspath(os.path.join("Assets", "Search icon.png"))))
 
 
 class SearchFrame(ctk.CTkScrollableFrame):

@@ -4,13 +4,14 @@ import movieFrame
 import seriesFrame
 import searchFrame
 from PIL import Image
+import os
 
 # icons
-home_icon_path = ctk.CTkImage(Image.open("Assets/home icon.png"))
-movies_icon_path = ctk.CTkImage(Image.open("Assets/movies icon.png"))
-series_icon_path = ctk.CTkImage(Image.open("Assets/series icon.png"))
-search_icon_path = ctk.CTkImage(Image.open("Assets/Search icon.png"))
-downloads_icon_path = ctk.CTkImage(Image.open("Assets/download icon.png"))
+icon_names = ["home icon.png", "movies icon.png", "series icon.png", "Search icon.png", "download icon.png"]
+icon_paths = [os.path.abspath(os.path.join("Assets", name)) for name in icon_names]
+icon_images = [ctk.CTkImage(Image.open(path)) for path in icon_paths]
+
+home_icon_path, movies_icon_path, series_icon_path, search_icon_path, downloads_icon_path = icon_images
 
 
 class TopFrame(ctk.CTkFrame):
