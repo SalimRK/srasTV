@@ -7,11 +7,11 @@ from PIL import Image
 import os
 
 # icons
-icon_names = ["home icon.png", "movies icon.png", "series icon.png", "Search icon.png", "download icon.png"]
+icon_names = ["home icon.png", "movies icon.png", "series icon.png", "Search icon.png"]
 icon_paths = [os.path.abspath(os.path.join("Assets", name)) for name in icon_names]
 icon_images = [ctk.CTkImage(Image.open(path)) for path in icon_paths]
 
-home_icon_path, movies_icon_path, series_icon_path, search_icon_path, downloads_icon_path = icon_images
+home_icon_path, movies_icon_path, series_icon_path, search_icon_path = icon_images
 
 
 class TopFrame(ctk.CTkFrame):
@@ -46,12 +46,6 @@ class TopFrame(ctk.CTkFrame):
         )
         self.search_button.pack(side=ctk.LEFT, padx=30, pady=10)
 
-        # Download button
-        self.downloads_button = ctk.CTkButton(
-            self, image=downloads_icon_path, text="", command=self.downloads_click, height=70, width=self.min_width
-        )
-        self.downloads_button.pack(side=ctk.LEFT, padx=30, pady=10)
-
         # Bind the resize event to adjust button widths
         self.bind("<Configure>", self.on_resize)
 
@@ -67,9 +61,6 @@ class TopFrame(ctk.CTkFrame):
     def search_click(self):
         self.switch_frame(searchFrame.SearchFrame)
 
-    def downloads_click(self):
-        pass
-
     # switch frames: delete the old and add the new one
     def switch_frame(self, frame_class):
         if hasattr(self, 'current_frame'):
@@ -77,6 +68,9 @@ class TopFrame(ctk.CTkFrame):
 
         self.current_frame = frame_class(self.master)
         self.current_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew", columnspan=5)
+        self.current_frame.rowconfigure(1, weight=1)
+        self.current_frame.columnconfigure(0, weight=1)
+        self.current_frame.grid_propagate()
 
     # Event handler for resizing the window
     def on_resize(self, event):
@@ -89,6 +83,5 @@ class TopFrame(ctk.CTkFrame):
             self.movies_button,
             self.series_button,
             self.search_button,
-            self.downloads_button,
         ]:
             button.configure(width=new_width)

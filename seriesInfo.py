@@ -111,4 +111,3 @@ class UrlWindow(ctk.CTkToplevel):
         self.url_textbox.configure(state="disabled")
         self.url_textbox.grid(row=0, column=0, padx=10, pady=10)
 
-

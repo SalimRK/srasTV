@@ -6,7 +6,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.attributes("-fullscreen", "False")
-        self.geometry("700x700")
+        self.geometry("650x650")
         self.title("srasTV")
 
         # # for full screen
@@ -18,7 +18,7 @@ class App(ctk.CTk):
 
         # add the top frame
         self.top_frame = topframe.TopFrame(master=self)
-        self.top_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew", columnspan=5)
+        self.top_frame.grid(row=0, column=0, padx=20, pady=20, sticky="ns", columnspan=5)
 
         # initialize the home page
         import homeFrame
