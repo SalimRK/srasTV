@@ -66,7 +66,7 @@ def get_seasons(title_id, season_num):
 
 def watch_media(title_id, episode_number=None, season_number=None):
     # Determine the absolute path to the template HTML file
-    template_path = os.path.abspath('temp/htmlTemplate.html')
+    template_path = os.path.abspath('temp/index.html')
 
     if episode_number is not None and season_number is not None:
         # Generate TV series URL with query parameters
