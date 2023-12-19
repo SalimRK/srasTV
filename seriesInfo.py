@@ -104,7 +104,7 @@ class UrlWindow(ctk.CTkToplevel):
         self.geometry("450x100")
         self.title(f"S{season_number}E{episode_data_number}")
 
-        url = query.watch_episode(title_id=title_id, episode_number=episode_data_number, season_number=season_number)
+        url = query.watch_media(title_id=title_id, episode_number=episode_data_number, season_number=season_number)
 
         self.url_textbox = ctk.CTkTextbox(self, width=400, height=50)
         self.url_textbox.insert("0.0", url)

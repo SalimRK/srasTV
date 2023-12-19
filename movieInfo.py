@@ -66,7 +66,7 @@ class MovieInfoFrame(ctk.CTkToplevel):
 
     def launch_movie_function(self):
         # Assuming you have a function in the query file that you want to call
-        url = query.watch_movie(self.title_id)
+        url = query.watch_media(self.title_id)
         self.url_textbox.configure(state="normal")
         self.url_textbox.insert("0.0", url)
         self.url_textbox.configure(state="disabled")

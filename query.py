@@ -55,15 +55,6 @@ def get_poster(img_path):
         return image
 
 
-def watch_movie(title_id):
-    # Determine the absolute path to the template HTML file
-    template_path = os.path.abspath('temp/templateMovie.html')
-
-    # Generate TV series URL with query parameters
-    tv_src_url = f"file://{template_path}?TMDB_ID={title_id}"
-    return tv_src_url
-
-
 def get_movie_recommendations(title_id):
     recommendations = movie.recommendations(movie_id=title_id)
     return recommendations
@@ -73,11 +64,15 @@ def get_seasons(title_id, season_num):
     result = season.details(title_id, season_num)
     return result
 
-
-def watch_episode(title_id, episode_number, season_number):
+def watch_media(title_id, episode_number=None, season_number=None):
     # Determine the absolute path to the template HTML file
-    template_path = os.path.abspath('temp/templateTv.html')
+    template_path = os.path.abspath('temp/htmlTemplate.html')
 
-    # Generate TV series URL with query parameters
-    tv_src_url = f"file://{template_path}?TMDB_ID={title_id}&seasonNumber={season_number}&episodeNumber={episode_number}"
-    return tv_src_url
+    if episode_number is not None and season_number is not None:
+        # Generate TV series URL with query parameters
+        media_src_url = f"file://{template_path}?TMDB_ID={title_id}&seasonNumber={season_number}&episodeNumber={episode_number}"
+    else:
+        # Generate movie URL with query parameters
+        media_src_url = f"file://{template_path}?TMDB_ID={title_id}"
+
+    return media_src_url
